@@ -11,6 +11,7 @@ const https = require("https");
 const homeStartingContent = "Introductory content for my blog. This is the starting page for my daily journal.";
 const aboutContent = "This page describes what the blog is all about and some information about myself.";
 const contactContent = "Brief information about how to contact me via social media.";
+const weatherContent = "This is our weather search feature! Enter your city below and it will show the city's weather!";
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 let posts = [];
+let weathers = [];
 
 app.get("/", function(req, res){
   res.render("home", {
@@ -35,7 +37,19 @@ app.get("/about", function(req, res){
 app.get("/contact", function(req, res){
   res.render("contact", {contactContent: contactContent});
 });
+app.get("/weather", function(req, res){
+  res.render("weather", {weatherContent: weatherContent});
+});
+app.post("/weather", function(req, res){
+   const city = {
+     city: req.body.cityInput
 
+   };
+   weathers.push(city);
+
+   res.redirect("/weather");
+   
+});
 app.get("/compose", function(req, res){
   res.render("compose");
 });
