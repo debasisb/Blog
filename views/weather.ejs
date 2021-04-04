@@ -3,12 +3,22 @@
     <p> <%= weatherContent %> </p>
    
 
-    <form action="/" method="post">
+    <form action="/weather" method="post">
       <div>
         <label for="cityInput">City: </label>
         <input id = "cityInput" type="text" name="cityInput">
         <button type="submit">Go</button>
       </div>
     </form>
-    <textarea class="form-control" name="postBody" rows="5" cols="30"></textarea>
+    <div>
+    <h1>Results</h1>
+     <%  weathers.forEach(function(cities){ %>
+
+    <h1><%=cities.city%>,<%=cities.temp%></h1>
+    <h2><img src=<%=cities.img%>></h2>
+    <h2><%=cities.weatherdes%>, <%=cities.humidity%>, <%=cities.windspeed%>
+    <% }) %></h2>
+    </div>
+    
+
 <%- include("partials/footer"); -%>
